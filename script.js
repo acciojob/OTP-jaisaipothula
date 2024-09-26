@@ -1,5 +1,11 @@
 document.querySelectorAll('.code').forEach((input, index) => {
-    input.addEventListener('input', () => {
+    input.addEventListener('input', (e) => {
+        // Only allow numbers
+        if (/\D/.test(e.data)) {
+            input.value = '';
+            return;
+        }
+        
         if (input.value.length >= 1 && index < 5) {
             // Focus on the next input
             document.getElementById(`code-${index + 2}`).focus();
