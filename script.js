@@ -1,28 +1,19 @@
-//your JS code here. If required.
-const inputs = document.querySelectorAll('.code');
+document.querySelectorAll('.code').forEach((input, index) => {
+    input.addEventListener('input', (e) => {
+        if (input.value.length >= 1) {
+            // Move to the next input if current is filled
+            if (index < 5) {
+                document.querySelector(`#code-${index + 2}`).focus();
+            }
+        }
+    });
 
-inputs.forEach((input, index) => {
-  input.addEventListener('input', (e) => {
-    const val = e.target.value;
-    if (val.length === 1) {
-      // Move focus to the next input if available
-      if (index < inputs.length - 1) {
-        inputs[index + 1].focus();
-      }
-    } else if (val.length === 0) {
-      // Move focus to the previous input on backspace press
-      if (index > 0) {
-        inputs[index - 1].focus();
-      }
-    }
-  });
-
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Backspace' && e.target.value.length === 0) {
-      // Move focus to the previous input on backspace press
-      if (index > 0) {
-        inputs[index - 1].focus();
-      }
-    }
-  });
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace') {
+            if (input.value.length === 0 && index > 0) {
+                // Move focus to the previous input if current is empty
+                document.querySelector(`#code-${index}`).focus();
+            }
+        }
+    });
 });
